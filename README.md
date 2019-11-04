@@ -1,22 +1,43 @@
+# Keyword search of Open Data
 
-### Development mode
-To start the Figwheel compiler, navigate to the project folder and run the following command in the terminal:
+This is the repository for a keyword search engine for Open Data repositories.
 
-```
-lein figwheel
-```
+The implementation is based :
 
-Figwheel will automatically push cljs changes to the browser.
-Once Figwheel starts up, you should be able to open the `public/index.html` page in the browser.
+- [Xapian](https://xapian.org/): a high performant and scalable text search engine.
+- [Gensim](https://radimrehurek.com/gensim/): a Python NLP library.  This is
+  used to access pretrained word vectors.
 
-### REPL
+The search engine indexes and searches both metadata and data values of
+[Socrata](https://dev.socrata.com/data/) data sets.
 
-The project is setup to start nREPL on port `7002` once Figwheel starts.
-Once you connect to the nREPL, run `(cljs)` to switch to the ClojureScript REPL.
+## Prerequisites:
 
-### Building for production
+- Socrata datasets:
+    - Data files: `./data/usertables_data/<package_id>.json.gz
+    - Metadata files: `./data/usertables_schema/<package_id>_schema.json`
 
-```
-lein clean
-lein package
-```
+- Pretrained GloVe word vectors
+
+## Makefile
+
+`make ./data/wordvec/glove.6B.txt`
+
+> Downloads the glove vectors
+
+`make ./data/wordvec_50d.txt`
+
+> converts the glove vectors to word2vec vectors
+
+`make index`
+
+> Creates the xapian index for both metadata and data values.
+
+`make backend`
+
+> Starts the backend search API server
+
+`make frontend`
+
+> Starts the frontend Web application at port 8997.
+> You can start searching at "http://localhost:8997"
