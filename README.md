@@ -1,5 +1,7 @@
 # Keyword search of Open Data
 
+<img src="search-in-opendata.png"></img>
+
 This is the repository for a keyword search engine for Open Data repositories.
 
 The implementation is based :
@@ -41,3 +43,5 @@ The search engine indexes and searches both metadata and data values of
 
 > Starts the frontend Web application at port 8997.
 > You can start searching at "http://localhost:8997"
+
+
